@@ -1,8 +1,7 @@
 import { Types } from 'mongoose';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { AuthenticatedRequest } from '../middleware/authMiddleware';
 
-// Mock de usuário autenticado
 export const mockUser = {
   _id: new Types.ObjectId(),
   id: new Types.ObjectId().toString(),
@@ -11,7 +10,6 @@ export const mockUser = {
   password: '$2b$10$abcdefghijklmnopqrstuvwxyz123456789',
 };
 
-// Mock de imagem
 export const mockImage = {
   _id: new Types.ObjectId(),
   filename: 'test-image-123456.jpg',
@@ -27,7 +25,6 @@ export const mockImage = {
   createdAt: new Date(),
 };
 
-// Mock de arquivo para upload
 export const mockFile = {
   fieldname: 'image',
   originalname: 'test-image.jpg',
@@ -39,7 +36,6 @@ export const mockFile = {
   size: 1024,
 };
 
-// Mock de request autenticada
 export const mockAuthRequest = (overrides = {}) => {
   const req = {
     user: {
@@ -54,8 +50,7 @@ export const mockAuthRequest = (overrides = {}) => {
   return req;
 };
 
-// Mock de response
-export const mockResponse = () => {
+export const mockResponse = (): Response => {
   const res = {} as Response;
   res.status = jest.fn().mockReturnValue(res);
   res.json = jest.fn().mockReturnValue(res);
@@ -63,5 +58,4 @@ export const mockResponse = () => {
   return res;
 };
 
-// Mock de next function
 export const mockNext = jest.fn();

@@ -6,7 +6,7 @@ interface IImage extends Document {
   uploader: mongoose.Types.ObjectId | null;
   description?: string;
   tags?: string[];
-  likes: mongoose.Types.Array<mongoose.Types.ObjectId>; // corrigido
+  likes: mongoose.Types.Array<mongoose.Types.ObjectId>;
   comments: {
     user: mongoose.Types.ObjectId;
     text: string;

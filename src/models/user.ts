@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';          // use import para manter o padrão ES Modules
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
   name: String,
