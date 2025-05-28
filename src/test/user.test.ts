@@ -1,19 +1,10 @@
 import app from '../app';
 import supertest from 'supertest';
-import mongoose from 'mongoose';
+
+import '../utils/testSetup';
+
 const request = supertest(app);
 
-
-beforeAll(async () => {
-  if (mongoose.connection.readyState === 0) {
-    await mongoose.connect('mongodb://localhost:27017/image_sharing');
-  }
-});
-
-afterAll(async () => {
-  await mongoose.connection.dropDatabase();
-  await mongoose.connection.close();
-});
 describe("User Registration", () => {
   it("Deve registrar um usuário com sucesso", async () => {
     const time = Date.now();
@@ -22,7 +13,7 @@ describe("User Registration", () => {
 
     const res = await request.post("/user").send(user);
 
-    expect(res.statusCode).toEqual(200);
+    expect(res.statusCode).toEqual(201);
     expect(res.body.email).toEqual(email);
   });
 
@@ -44,8 +35,8 @@ describe("User Registration", () => {
 
     const res = await request.post("/user").send(user2);
 
-    expect(res.statusCode).toBe(400);
-    expect(res.body).toHaveProperty('error', 'Email já cadastrado.');
+    expect(res.statusCode).toBe(409);
+    expect(res.body).toHaveProperty('error', 'Este email já está cadastrado.');
   });
 
   it("Deve retornar um token quando o login for efetuado", async () => {
